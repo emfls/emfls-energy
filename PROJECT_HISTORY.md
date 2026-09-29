@@ -1,14 +1,16 @@
 # Project History
 
-## 2026-09-30 — Site18 IndexNow groundwork (in progress)
+## 2026-09-30 — Site18 Foundation/Search checkpoint
 
 - Revalidated the single-Site cycle in Notion, local checkout (`main`, `66b0939`), public GitHub repository, and the active `https://energy.emfls.com/` Production homepage before continuing.
 - Naver Search Advisor is unauthenticated in the existing browser session. Per the Owner Directive, stopped before login/credentials; Naver site registration and sitemap submission remain blocked by account access.
 - Confirmed from official IndexNow and Naver documentation that Naver supports IndexNow and that a host-root key text file can verify the submitting host. Generated an independent Site18 key file under `public/`; no other site's key is reused.
-- Added a generated-output contract assertion for exactly one 32-hex root key file whose contents match its filename. Production deployment and actual IndexNow submission are not yet verified.
-- Local verification: `npm test` PASS (6/6; static build included), `npm run check` PASS (11 Astro files, 0 errors/warnings/hints), and `git diff --check` PASS. Generated output includes the single key file and robots file; sitemap output remains the five expected canonical routes.
-- Google ownership is set and its sitemap submission is acknowledged, but GSC's latest table still says `가져올 수 없음` with 0 discovered pages; keep the issue open and retain `noindex,follow`.
-- Next: deploy only this Repo through the existing `main` connection, verify the live key file and production robots/sitemap, and make one IndexNow notification for the current canonical routes. Record Daum lookup as an independent provider step.
+- Added a generated-output contract assertion for exactly one 32-hex root key file whose contents match its filename. Code commit `94b40eac66d6f15090261d95c5d4c3d8c5cca87f` was pushed to `main`; Cloudflare Production deployment `e7835187-87d4-47de-909e-c7d3e6bfe37e` succeeded for that exact commit, and `energy.emfls.com` remains active.
+- Local verification: `npm test` PASS (6/6; static build included), `npm run check` PASS (11 Astro files, 0 errors/warnings/hints), and `git diff --check` PASS. Production HTTP checks: home/key/robots/sitemap 200; homepage canonical verified; unknown path 404 with 0 redirects; sitemap contains exactly five canonical URLs.
+- IndexNow POST for the five recent canonical pages returned HTTP 202 Accepted. Record receipt with key validation pending; this is not evidence of indexing.
+- Google URL-prefix ownership is SET and sitemap submission acknowledged, but GSC still says `가져올 수 없음` with 0 discovered pages. Naver property and sitemap are BLOCKED_LOGIN. Daum lookup for `http://energy.emfls.com` returns `미등록 사이트`; application requires applicant name/email and privacy/service consent. Daum Webmaster Beta setup requires a PIN and terms consent. No applicant details, PIN, or consent was supplied.
+- Baseline remains IN_PROGRESS because measured 1440/390/320 viewport and overflow evidence is absent. Keep `noindex,follow` while the indexability gate is incomplete.
+- Site Control Page, Registry, and Handoff Index now record Site18 evidence and local blockers. Next ascending runnable site is Site19 `emfls-safety`; return to Site18's provider blockers when owner information/account access/consent is available.
 
 ## 2026-09-30 — Foundation/Search Launch horizontal pass
 
