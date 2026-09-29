@@ -1,0 +1,55 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="페이지를 찾을 수 없습니다 | EMFLS Energy"
+  description="요청한 에너지 정보 페이지를 찾지 못했습니다. 홈에서 기본 안내를 확인하세요."
+  canonical={false}
+>
+  <main id="main-content" class="shell not-found">
+    <p class="eyebrow">404 · PAGE NOT FOUND</p>
+    <h1>이 페이지를<br />찾을 수 없습니다.</h1>
+    <p>주소가 바뀌었거나 아직 제공되지 않는 페이지입니다. 홈에서 에너지 사용의 기본을 확인해 보세요.</p>
+    <a href="/">EMFLS Energy 홈으로 돌아가기</a>
+  </main>
+</SiteLayout>
+
+<style>
+  .not-found {
+    min-height: 50vh;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 70px;
+  }
+
+  .eyebrow {
+    margin: 0 0 18px;
+    color: var(--green);
+    font-size: 0.74rem;
+    font-weight: 760;
+    letter-spacing: 0.13em;
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--ink);
+    font-family: Georgia, "Noto Serif KR", serif;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    letter-spacing: -0.05em;
+    line-height: 1.17;
+  }
+
+  .not-found > p:not(.eyebrow) {
+    max-width: 56ch;
+    margin: 20px 0;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .not-found > a {
+    font-weight: 720;
+  }
+</style>

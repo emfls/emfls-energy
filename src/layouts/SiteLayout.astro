@@ -1,0 +1,229 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string | false;
+}
+
+const { title, description, canonical } = Astro.props;
+const site = Astro.site ?? new URL('https://energy.emfls.com/');
+const canonicalUrl = canonical === false
+  ? undefined
+  : new URL(canonical ?? Astro.url.pathname, site).href;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,follow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="EMFLS Energy" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">본문 바로가기</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="/" aria-label="EMFLS Energy 홈">
+          <span class="brand-kicker">EMFLS</span>
+          <span class="brand-name">Energy</span>
+        </a>
+        <nav aria-label="주요 메뉴">
+          <a href="/#usage-basics">에너지 기초</a>
+          <a href="/about/">사이트 소개</a>
+          <a href="/editorial-policy/">편집 원칙</a>
+        </nav>
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p class="footer-brand">EMFLS Energy</p>
+        <nav aria-label="정책 및 연락처">
+          <a href="/about/">소개</a>
+          <a href="/privacy/">개인정보</a>
+          <a href="/contact/">연락처</a>
+          <a href="/editorial-policy/">편집 원칙</a>
+        </nav>
+        <p class="footer-note">사용량 이해를 돕는 정보이며 실제 계량값이나 청구서를 대신하지 않습니다.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :global(:root) {
+    color-scheme: light;
+    font-family: Inter, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+    color: #142b25;
+    background: #f5f4ed;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    --ink: #142b25;
+    --muted: #566b65;
+    --green: #174f3d;
+    --blue: #174a68;
+    --amber: #f2bf58;
+    --paper: #f5f4ed;
+    --card: #fffefa;
+    --line: #d9dfd5;
+  }
+
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    min-width: 320px;
+    margin: 0;
+  }
+
+  :global(a) {
+    color: var(--green);
+    text-underline-offset: 0.2em;
+  }
+
+  :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  :global(a:focus-visible) {
+    outline: 3px solid #b87510;
+    outline-offset: 4px;
+    border-radius: 3px;
+  }
+
+  :global(.shell) {
+    width: min(1120px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .skip-link {
+    position: absolute;
+    z-index: 5;
+    top: 12px;
+    left: 12px;
+    padding: 10px 14px;
+    transform: translateY(-160%);
+    color: white;
+    background: var(--ink);
+    border-radius: 6px;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: rgb(255 254 250 / 88%);
+  }
+
+  .header-inner {
+    display: flex;
+    min-height: 82px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand {
+    display: grid;
+    gap: 1px;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.1;
+  }
+
+  .brand-kicker {
+    color: var(--muted);
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.18em;
+  }
+
+  .brand-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.38rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .header-inner nav,
+  .footer-inner nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+
+  .header-inner nav a,
+  .footer-inner nav a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .site-footer {
+    margin-top: 96px;
+    border-top: 1px solid var(--line);
+    background: #e9eee6;
+  }
+
+  .footer-inner {
+    display: grid;
+    gap: 18px;
+    padding-block: 30px 36px;
+  }
+
+  .footer-brand,
+  .footer-note {
+    margin: 0;
+  }
+
+  .footer-brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.14rem;
+    font-weight: 700;
+  }
+
+  .footer-note {
+    max-width: 70ch;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    :global(.shell) {
+      width: min(100% - 32px, 1120px);
+    }
+
+    .header-inner {
+      min-height: 0;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 14px;
+      padding-block: 18px;
+    }
+
+    .header-inner nav,
+    .footer-inner nav {
+      gap: 10px 18px;
+    }
+
+    .header-inner nav a {
+      font-size: 0.84rem;
+    }
+  }
+</style>

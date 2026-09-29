@@ -1,0 +1,99 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="사이트 소개 | EMFLS Energy"
+  description="EMFLS Energy가 다루는 가정 에너지 사용량, 소비전력과 전력량의 차이, 계산의 범위를 소개합니다."
+>
+  <main id="main-content" class="shell document">
+    <p class="eyebrow">ABOUT EMFLS ENERGY</p>
+    <h1>집에서 쓰는 에너지를<br />이해하기 쉽게 설명합니다.</h1>
+    <p class="lead">
+      EMFLS Energy는 가정의 전기·가스·냉난방 사용량을 이해하고, 사용량을 계산할 때
+      어떤 값과 가정이 필요한지 알아보는 정보 사이트입니다.
+    </p>
+
+    <section>
+      <h2>무엇을 다루나요?</h2>
+      <p>
+        소비전력(W), 사용시간, 전력량(kWh)의 관계와 가전제품의 에너지 사용을 읽는 방법을
+        설명합니다. 사용 습관을 비교하거나 비용을 추정할 때는 단위와 계산 전제를 먼저 밝힙니다.
+      </p>
+    </section>
+    <section>
+      <h2>무엇을 약속하지 않나요?</h2>
+      <p>
+        실제 계량값을 대신하는 실시간 사용량이나 절약액을 보장하지 않습니다.
+        전기·가스 요금은 적용 시점과 계약, 사용량 구간에 따라 달라지므로
+        고정 단가를 현재 요금처럼 제시하지 않습니다.
+      </p>
+    </section>
+    <p class="updated">페이지 기준일: 2026년 9월 30일</p>
+  </main>
+</SiteLayout>
+
+<style>
+  .document {
+    max-width: 880px;
+    padding-top: 74px;
+  }
+
+  .eyebrow {
+    margin: 0 0 20px;
+    color: var(--green);
+    font-size: 0.74rem;
+    font-weight: 760;
+    letter-spacing: 0.13em;
+  }
+
+  h1,
+  h2 {
+    color: var(--ink);
+    font-family: Georgia, "Noto Serif KR", serif;
+    letter-spacing: -0.045em;
+  }
+
+  h1 {
+    max-width: 19ch;
+    margin: 0;
+    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+    line-height: 1.2;
+  }
+
+  .lead {
+    max-width: 66ch;
+    margin: 24px 0 52px;
+    color: var(--muted);
+    font-size: 1.12rem;
+    line-height: 1.85;
+  }
+
+  section {
+    max-width: 72ch;
+    margin-top: 34px;
+  }
+
+  h2 {
+    margin: 0 0 12px;
+    font-size: 1.55rem;
+  }
+
+  section p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  .updated {
+    margin-top: 52px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 600px) {
+    .document {
+      padding-top: 48px;
+    }
+  }
+</style>
