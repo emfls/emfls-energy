@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -57,6 +57,15 @@ test('robots allows verification crawlers and references the only sitemap', asyn
   assert.match(robots, /User-agent:\s*\*/i);
   assert.match(robots, /Allow:\s*\//i);
   assert.match(robots, /Sitemap:\s*https:\/\/energy\.emfls\.com\/sitemap\.xml/i);
+});
+
+test('IndexNow ownership key is published at the host root with matching content', async () => {
+  const files = await readdir(dist);
+  const keyFiles = files.filter((file) => /^[a-f0-9]{32}\.txt$/i.test(file));
+
+  assert.equal(keyFiles.length, 1, 'publish one Site18-specific root key file');
+  const key = keyFiles[0].slice(0, -4);
+  assert.equal((await readExpected(keyFiles[0])).trim(), key);
 });
 
 test('single sitemap contains only canonical foundation URLs, not the 404 route', async () => {
